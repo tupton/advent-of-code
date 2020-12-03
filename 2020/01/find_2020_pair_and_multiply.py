@@ -33,7 +33,6 @@ def multiply_triples(triples):
     return map(multiply_triple, triples)
 
 def find_2020_pair_and_multiply(input_file, group_size):
-    print(f'{group_size}')
     lines = open(input_file).read().splitlines()
     ordered = sort_lines(lines)
     if group_size == 3:
