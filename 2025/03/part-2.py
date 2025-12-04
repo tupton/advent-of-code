@@ -1,7 +1,7 @@
 import sys
 
 
-def find_digit(bank: str, target_len: int, current_number: list[str]) -> list[str]:
+def find_digit(bank: str, target_len: int, current_number: str) -> str:
     print(f"Searching for length {target_len} in bank: {bank}")
     if target_len == 0:
         return current_number
@@ -11,7 +11,7 @@ def find_digit(bank: str, target_len: int, current_number: list[str]) -> list[st
         print(
             f"Target length {target_len} matches remaining bank; taking the rest: {bank}"
         )
-        return current_number + list(bank)
+        return current_number + bank
 
     for i in range(9, 0, -1):
         remaining_len = len(bank) - target_len + 1
@@ -20,7 +20,7 @@ def find_digit(bank: str, target_len: int, current_number: list[str]) -> list[st
                 print(
                     f"Found digit {char} at position {j} (remaining length {target_len})"
                 )
-                next_number = current_number + [char]
+                next_number = current_number + char
                 return find_digit(bank[j + 1 :], target_len - 1, next_number)
     return current_number
 
@@ -30,9 +30,9 @@ def main():
     accum = 0
     for line in lines:
         bank = line.strip()
-        max_number = find_digit(bank, 12, [])
+        max_number = find_digit(bank, 12, "")
 
-        accum += int("".join(max_number))
+        accum += int(max_number)
 
     print(f"Sum of max 12-tuples: {accum}")
 
