@@ -2,9 +2,10 @@ import sys
 
 
 def find_digit(bank: str, target_len: int, current_number: str) -> str:
-    print(f"Searching for length {target_len} in bank: {bank}")
     if target_len == 0:
         return current_number
+
+    print(f"Searching for length {target_len} in bank: {bank}")
 
     # return the rest of the bank if its length matches target_len
     if len(bank) == target_len:
@@ -31,6 +32,7 @@ def main():
     for line in lines:
         bank = line.strip()
         max_number = find_digit(bank, 12, "")
+        print(f"Max 12-tuple from bank {bank} is {max_number}")
 
         accum += int(max_number)
 
