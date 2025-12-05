@@ -70,21 +70,26 @@ def get_grid_removed_count(grid1: Grid, grid2: Grid) -> int:
     )
 
 
-def find_num_accessible_paper_rolls(grid: Grid, accum: int = 0) -> int:
+def find_num_accessible_paper_rolls(grid: Grid) -> int:
     """
     Recursively generate a new grid and accumulate the count of removed paper rolls until no more can be removed.
     """
-    new_grid, changed_count = regenerate_grid(grid)
 
-    return (
-        accum + changed_count
-        if grid == new_grid
-        else find_num_accessible_paper_rolls(new_grid, accum + changed_count)
-    )
+    accum = 0
+
+    while True:
+        new_grid, changed_count = regenerate_grid(grid)
+
+        accum += changed_count
+
+        if new_grid == grid:
+            return accum
+
+        grid = new_grid
 
 
 def main():
-    grid = [list(line.strip()) for line in sys.stdin]
+    grid: Grid = [list(line.strip()) for line in sys.stdin]
 
     num_accessible_paper_rolls = find_num_accessible_paper_rolls(grid)
     print(f"Accessible paper rolls: {num_accessible_paper_rolls}")
